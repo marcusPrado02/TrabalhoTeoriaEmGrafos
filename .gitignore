@@ -1,0 +1,85 @@
+# Arquivos de compilação
+*.o
+*.out
+*.obj
+
+# Arquivos executáveis
+*.exe
+*.app
+*.com
+*.dll
+*.so
+*.dylib
+
+# Arquivos gerados pelo CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CMakeSettings.json
+CMakeScripts/
+cmake-build-debug
+
+# Arquivos gerados pelo Visual Studio
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcproj
+*.pdb
+
+# Arquivos gerados pelo Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+
+# Arquivos gerados pelo Makefile
+Makefile
+GNUmakefile
+
+# Arquivos de dependência
+*.d
+
+# Arquivos de log
+*.log
+
+# Arquivos de saída do Valgrind
+valgrind*
+
+# Arquivos temporários
+*~
+*.swp
+*.swo
+
+# Diretório de compilação
+build/
+bin/
+
+# Diretórios de distribuição
+dist/
+release/
+
+# Arquivos específicos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de configuração de IDEs
+.vscode/
+.idea/
+*.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Pacotes e módulos gerados pelo C++
+*.so
+*.a
+
+# Arquivos de documentação gerados
+doc/
+
+# Arquivos de backup
+*.bak
+*.backup
+
+# Cache e arquivos temporários do CLion
+.cmake/
+.idea/
