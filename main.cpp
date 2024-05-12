@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <sstream>
 #include "graph.cpp"
 
 using namespace std;
@@ -39,6 +40,15 @@ int main() {
         cout << "9. Verificar se o grafo é completo\n";
         cout << "10. Verificar se o grafo é bipartido\n";
         cout << "11. Visualizar grafo \n";
+        cout << "12. Algoritmo de Kruskal (Lista de Adjacência)\n";
+        cout << "13. Algoritmo de Kruskal (Matriz de Adjacência)\n";
+        cout << "14. Algoritmo de Prim (Lista de Adjacência)\n";
+        cout << "15. Algoritmo de Prim (Matriz de Adjacência)\n";
+        cout << "16. Ordenação Topológica (Lista de Adjacência)\n";
+        cout << "17. Adicionar arestas com peso em sequencia\n"; // Opção adicionada
+        cout << "18. Adicionar aresta com peso\n";
+        cout << "19. Remover aresta com peso\n";
+        cout << "20. Adicionar arestas a partir de uma lista com peso\n";
         cout << "0. Sair\n";
 
         cout << "\nEscolha uma opção: ";
@@ -199,6 +209,171 @@ int main() {
                 } else {
                     graph.printGraphMatrix();
                 }
+                break;
+            }
+            case 12: {
+                if (choiceRepresentation == 1) {
+                    vector<Aresta> agmKruskalList = graph.AGMKruskalList();
+                    // Exibir a Árvore Geradora Mínima (AGM) obtida pelo algoritmo de Kruskal
+                    cout << "Árvore Geradora Mínima (Kruskal) - Lista de Adjacência:\n";
+                    for (const Aresta& aresta : agmKruskalList) {
+                        cout << "(" << aresta.origem << ", " << aresta.destino << ") - Peso: " << aresta.peso << endl;
+                    }
+                } else {
+                    cout << "Essa opção só está disponível para a representação por lista de adjacência.\n";
+                }
+                break;
+            }
+            case 13: {
+                if (choiceRepresentation == 2) {
+                    vector<Aresta> agmKruskalMatrix = graph.AGMKruskalMatrix();
+                    // Exibir a Árvore Geradora Mínima (AGM) obtida pelo algoritmo de Kruskal
+                    cout << "Árvore Geradora Mínima (Kruskal) - Matriz de Adjacência:\n";
+                    for (const Aresta& aresta : agmKruskalMatrix) {
+                        cout << "(" << aresta.origem << ", " << aresta.destino << ") - Peso: " << aresta.peso << endl;
+                    }
+                } else {
+                    cout << "Essa opção só está disponível para a representação por matriz de adjacência.\n";
+                }
+                break;
+            }
+            case 14: {
+                if (choiceRepresentation == 1) {
+                    vector<int> agmPrimList = graph.AGMPrimList();
+                    // Exibir a Árvore Geradora Mínima (AGM) obtida pelo algoritmo de Prim
+                    cout << "Árvore Geradora Mínima (Prim) - Lista de Adjacência:\n";
+                    for (int vertex : agmPrimList) {
+                        cout << vertex << " ";
+                    }
+                    cout << endl;
+                } else {
+                    cout << "Essa opção só está disponível para a representação por lista de adjacência.\n";
+                }
+                break;
+            }
+            case 15: {
+                if (choiceRepresentation == 2) {
+                    vector<int> agmPrimMatrix = graph.AGMPrimMatrix();
+                    // Exibir a Árvore Geradora Mínima (AGM) obtida pelo algoritmo de Prim
+                    cout << "Árvore Geradora Mínima (Prim) - Matriz de Adjacência:\n";
+                    for (int vertex : agmPrimMatrix) {
+                        cout << vertex << " ";
+                    }
+                    cout << endl;
+                } else {
+                    cout << "Essa opção só está disponível para a representação por matriz de adjacência.\n";
+                }
+                break;
+            }
+            case 16: {
+                if (choiceRepresentation == 1) {
+                    vector<int> ordenacaoTopologica = graph.ordenacaoTopologicaList();
+                    // Exibir a Ordenação Topológica obtida
+                    cout << "Ordenação Topológica - Lista de Adjacência:\n";
+                    for (int vertex : ordenacaoTopologica) {
+                        cout << vertex << " ";
+                    }
+                    cout << endl;
+                } else {
+                    cout << "Essa opção só está disponível para a representação por lista de adjacência.\n";
+                }
+                break;
+            }
+            case 17: {
+                int numArestas;
+                cout << "Digite o número de arestas: ";
+                cin >> numArestas;
+                vector<pair<pair<int, int>, int>> arestas;
+                for (int i = 0; i < numArestas; ++i) {
+                    int src, dest, peso;
+                    cout << "Aresta " << i + 1 << ":\n";
+                    cout << "Digite o vértice de origem: ";
+                    cin >> src;
+                    cout << "Digite o vértice de destino: ";
+                    cin >> dest;
+                    cout << "Digite o peso da aresta: ";
+                    cin >> peso;
+                    arestas.push_back({{src, dest}, peso});
+                }
+                graph.addEdgesFromList(arestas);
+                cout << "Arestas adicionadas com sucesso.\n";
+                break;
+            }
+            case 18: {
+                int src, dest, weight;
+                cout << "Digite o vértice de origem: ";
+                cin >> src;
+                cout << "Digite o vértice de destino: ";
+                cin >> dest;
+                cout << "Digite o peso da aresta: ";
+                cin >> weight;
+                if (choiceRepresentation == 1) {
+                    graph.addEdgeListWithWeight(src, dest, weight);
+                } else {
+                    graph.addEdgeMatrixWithWeight(src, dest, weight);
+                }
+                cout << "Aresta com peso adicionada com sucesso.\n";
+                break;
+            }
+            case 19: {
+                int src, dest, weight;
+                cout << "Digite o vértice de origem: ";
+                cin >> src;
+                cout << "Digite o vértice de destino: ";
+                cin >> dest;
+                if (choiceRepresentation == 1) {
+                    graph.removeEdgeListWithWeight(src, dest);
+                } else {
+                    graph.removeEdgeMatrixWithWeight(src, dest);
+                }
+                cout << "Aresta com peso removida com sucesso.\n";
+                break;
+            }
+            case 20: {
+                vector<pair<pair<int, int>, int>> novasArestas;
+
+                cout << "Insira as novas arestas no formato ((origem, destino), peso):\n";
+                cout << "Exemplo: (<5,4>, 2), (<3,2>, 1),(<1,3>, 5)\n";
+
+                string entrada;
+                getline(cin >> ws, entrada);
+
+                // Removendo os caracteres desnecessários da entrada
+                entrada.erase(remove(entrada.begin(), entrada.end(), ' '), entrada.end());
+                entrada.erase(remove(entrada.begin(), entrada.end(), '<'), entrada.end());
+                entrada.erase(remove(entrada.begin(), entrada.end(), '>'), entrada.end());
+                entrada.erase(remove(entrada.begin(), entrada.end(), '('), entrada.end());
+                entrada.erase(remove(entrada.begin(), entrada.end(), ')'), entrada.end());
+
+                // Dividindo a entrada em substrings separadas por ','
+                vector<string> substrings;
+                stringstream ss(entrada);
+                string substring;
+                while (getline(ss, substring, ',')) {
+                    substrings.push_back(substring);
+                }
+
+                // Processando cada substring para extrair origem, destino e peso
+                for (auto sub : substrings) {
+                    int origem, destino, peso;
+                    sscanf(sub.c_str(), "%d%d%d", &origem, &destino, &peso);
+                    novasArestas.push_back(make_pair(make_pair(origem, destino), peso));
+                }
+
+                // Adicionando as arestas ao grafo
+                for (auto aresta : novasArestas) {
+                    int src = aresta.first.first;
+                    int dest = aresta.first.second;
+                    int peso = aresta.second;
+
+                    if (choiceRepresentation == 1) {
+                        graph.addEdgeListWithWeight(src, dest, peso);
+                    } else {
+                        graph.addEdgeMatrixWithWeight(src, dest, peso);
+                    }
+                }
+
+                cout << "Arestas adicionadas com sucesso.\n";
                 break;
             }
             case 0: {
