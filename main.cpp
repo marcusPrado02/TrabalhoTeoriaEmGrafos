@@ -50,8 +50,7 @@ int main() {
         cout << "19. Remover aresta com peso\n";
         cout << "20. Adicionar arestas a partir de uma lista com peso\n";
         cout << "0. Sair\n";
-
-
+        
         cout << "\nEscolha uma opção: ";
         cin >> opcao;
 
