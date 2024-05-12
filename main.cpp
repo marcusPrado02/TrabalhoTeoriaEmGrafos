@@ -51,6 +51,7 @@ int main() {
         cout << "20. Adicionar arestas a partir de uma lista com peso\n";
         cout << "0. Sair\n";
 
+
         cout << "\nEscolha uma opção: ";
         cin >> opcao;
 
